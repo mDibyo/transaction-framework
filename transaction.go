@@ -1,7 +1,9 @@
 package transaction
 
 import (
+	"code.google.com/p/go-uuid/uuid"
 	"fmt"
+	"time"
 )
 
 // AmountFigure represents an amount of money. It is stored as an int64
@@ -39,10 +41,21 @@ func (a AmountFigure) Add(b AmountFigure) AmountFigure {
 	return AmountFigure(int64(a) + int64(b))
 }
 
-// Debit represents the amount a person owes. Amount is negative when
+// Debit represents the amount a person owes. Amount is negative when the
+// person instead of owing money, is owed money.
 type Debit struct {
-	Person Person
-	Amount AmountFigure
+	Timestamp int64
+	Person    Person
+	Amount    AmountFigure
+	Resolved  bool
+}
+
+func NewDebit(p Person, a AmountFigure) *Debit {
+	return &Debit{
+		Timestamp: time.Now().UnixNano(),
+		Person:    p,
+		Amount:    a,
+	}
 }
 
 // Record represents the record of a single payment. It holds a slice of

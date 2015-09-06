@@ -34,13 +34,11 @@ func (a AmountFigure) Float64() float64 {
 	return float64(a) / 100
 }
 
-
 // Debit represents the amount a person owes. Amount is negative when
 type Debit struct {
 	Person Person
 	Amount AmountFigure
 }
-
 
 // Record represents the record of a single payment. It holds a slice of
 // Debits, one for each person that must to a payment.
@@ -56,4 +54,3 @@ func (r *Record) Valid() bool {
 	}
 	return total == 0
 }
-

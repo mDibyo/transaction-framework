@@ -3,36 +3,36 @@ package transaction
 import "testing"
 
 func TestNewAmountFigure(t *testing.T) {
-	tests := []struct{
-		units int64
-		fractions int64
-		debit bool
+	tests := []struct {
+		units      int64
+		fractions  int64
+		debit      bool
 		wantAmount float64
-		wantError bool
+		wantError  bool
 	}{
 		{
-			units: -12,
+			units:     -12,
 			wantError: true,
 		},
 		{
-			units: 12,
+			units:     12,
 			fractions: -45,
 			wantError: true,
 		},
 		{
-			units: 12,
+			units:     12,
 			fractions: 145,
 			wantError: true,
 		},
 		{
-			units: 12,
-			fractions: 45,
-			debit: true,
+			units:      12,
+			fractions:  45,
+			debit:      true,
 			wantAmount: 12.45,
 		},
 		{
-			units: 12,
-			fractions: 45,
+			units:      12,
+			fractions:  45,
 			wantAmount: -12.45,
 		},
 	}
@@ -54,8 +54,8 @@ func TestNewAmountFigure(t *testing.T) {
 }
 
 func TestRecordValid(t *testing.T) {
-	tests := []struct{
-		r Record
+	tests := []struct {
+		r         Record
 		wantValid bool
 	}{
 		{

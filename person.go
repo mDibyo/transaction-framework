@@ -1,7 +1,6 @@
-package person
+package transaction
 
 import (
-	"code.google.com/p/go-uuid/uuid"
 	"code.google.com/p/go-uuid/uuid"
 )
 
@@ -9,8 +8,8 @@ import (
 type Person struct {
 	id uuid.UUID
 	name string
+	debitors []Debit
 	pCard PaymentCard
-
 }
 
 

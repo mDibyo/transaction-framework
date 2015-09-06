@@ -34,6 +34,11 @@ func (a AmountFigure) Float64() float64 {
 	return float64(a) / 100
 }
 
+// Add takes another AmountFigure and returns their sum.
+func (a AmountFigure) Add(b AmountFigure) AmountFigure {
+	return AmountFigure(int64(a) + int64(b))
+}
+
 // Debit represents the amount a person owes. Amount is negative when
 type Debit struct {
 	Person Person
@@ -48,9 +53,9 @@ type Record []Debit
 // amounts in it add up to 0 ie. all contributors to the payment are
 // accounted for.
 func (r *Record) Valid() bool {
-	var total int64
+	var total AmountFigure
 	for _, d := range *r {
-		total += int64(d.Amount)
+		total = total.Add(d.Amount)
 	}
-	return total == 0
+	return total.Float64() == 0
 }
